@@ -1,0 +1,18 @@
+<h1>Flight Booker</h1>
+
+<%= form_with(url: search_flights_path, method: :get) do |f| %>
+  <%= f.label :departure, "Departing from:" %>
+  <%= f.collection_select :departure, Airport.order(:id), :id, :name, { selected: params[:departure]} %><br>
+
+  <%= f.label :destination, "Arriving at:" %>
+  <%= f.collection_select :destination, Airport.order(:id), :id, :name, { selected: params[:destination]} %><br>
+
+  <%= f.submit 'Search' %>
+<% end %>
+
+<% @flights.each do |flight| %>
+  <p>Departing from: <strong><%= flight.departure.name %></strong></p>
+  <p>Destination: <strong><%= flight.destination.name %></strong></p>
+  <p>Duration: <strong><%= flight.duration %>hrs</strong></p>
+  <p>Flight Date: <strong><%= flight.date.to_date %></strong></p><br>
+<% end %>
