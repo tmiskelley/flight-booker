@@ -3,6 +3,10 @@ class FlightsController < ApplicationController
     @flights = Flight.includes(:departure, :destination).all
   end
 
+  def show
+    @flight = Flight.includes(:departure, :destination).find_by(id: params[:id])
+  end
+
   def search
     departure = params[:departure]
     destination = params[:destination]

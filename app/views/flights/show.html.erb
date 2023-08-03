@@ -1,0 +1,10 @@
+<h1>Flight Details</h1>
+
+<p><strong>Departing from:</strong> <%= @flight.departure.name %></p>
+<p><strong>Destination:</strong> <%= @flight.destination.name %></p>
+<p><strong>Duration:</strong> <%= @flight.duration %>hrs</p>
+<p><strong>Flight Date:</strong> <%= @flight.date.to_date %></p>
+
+<%= link_to 'return to flights', root_path %><br><br>
+
+<%= button_to 'Book flight' %>
