@@ -29,16 +29,18 @@
   
   <%= f.fields_for :passengers do |passenger| %>
     <div>
-      <div>
-        <%= passenger.label :name %>
-        <%= passenger.text_field :name %>
-      </div><br>
+      <% params[:passengers].to_i.times do %>
+        <div>
+          <%= passenger.label :name %>
+          <%= passenger.text_field :name %>
+        </div><br>
 
-      <div>
-        <%= passenger.label :email %>
-        <%= passenger.text_field :email %>
+        <div>
+          <%= passenger.label :email %>
+          <%= passenger.text_field :email %>
+        </div><br>
       </div><br>
-    </div><br>
+    <% end %>
   <% end %>
   
   

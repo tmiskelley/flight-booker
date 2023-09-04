@@ -7,4 +7,12 @@
 
 <%= link_to 'return to flights', root_path %><br><br>
 
-<%= link_to 'Book flight', new_booking_path(flight_id: @flight.id) %>
+<%= form_tag new_booking_path, method: :get do %>
+  <%= label_tag :passengers, "Select number of passengers:" %>
+  <%= select_tag :passengers, options_for_select([1, 2, 3, 4]) %>
+
+  <%= hidden_field_tag :flight_id, @flight.id %>
+  <%= submit_tag 'Book flight' %>
+<% end %>
+
+<!-- <%= link_to 'Book flight', new_booking_path(flight_id: @flight.id, passengers: 3) %> -->
