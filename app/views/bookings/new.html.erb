@@ -26,10 +26,9 @@
   <%= hidden_field_tag 'booking[flight_id]', params[:flight_id] %>
 
   <h2>Passenger info</h2>
-  
-  <%= f.fields_for :passengers do |passenger| %>
-    <div>
-      <% params[:passengers].to_i.times do %>
+  <% params[:passengers].to_i.times do %>
+    <%= f.fields_for :passengers do |passenger| %>
+      <div>
         <div>
           <%= passenger.label :name %>
           <%= passenger.text_field :name %>
@@ -42,7 +41,6 @@
       </div><br>
     <% end %>
   <% end %>
-  
   
   <%= f.submit "Book Flight" %>
 <% end %>
