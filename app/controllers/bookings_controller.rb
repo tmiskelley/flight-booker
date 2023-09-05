@@ -1,4 +1,11 @@
 class BookingsController < ApplicationController
+  def show
+    @booking = Booking.find_by(id: params[:id])
+    @flight = Flight.includes(:departure, :destination).find(@booking.flight_id)
+    @passenger_bookings = PassengerBooking.where("booking_id LIKE ?", @booking.id)
+    @passengers = find_passengers(@passenger_bookings)
+  end
+
   def new
     @booking = Booking.new
     @passengers = params[:passengers].to_i
@@ -10,7 +17,7 @@ class BookingsController < ApplicationController
 
     if @booking.save
       flash[:success] = "Flight booked successfully!"
-      redirect_to root_path
+      redirect_to @booking
     else
       flash.now[:error] = "The flight booking could not be submitted"
       render :new, status: :unprocessable_entity
@@ -18,6 +25,16 @@ class BookingsController < ApplicationController
   end
 
   private
+
+  def find_passengers(passenger_bookings)
+    passengers = []
+
+    passenger_bookings.each do |record|
+      passengers << Passenger.find(record.passenger_id).name
+    end
+
+    passengers
+  end
 
   def booking_params
     params.require(:booking).permit(:flight_id, passengers_attributes: [:name, :email])

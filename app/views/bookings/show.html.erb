@@ -1,0 +1,17 @@
+<h1>Booked Flight</h1>
+
+<div style="padding-left: 1rem; border: 1px solid black;">
+  <div style="display: flex; gap: 1rem;">
+    <p style="margin-bottom: 0;">Departing from: <strong><%= @flight.departure.name %></strong></p>
+    <p style="margin-bottom: 0;">Destination: <strong><%= @flight.destination.name %></strong></p>
+  </div>
+  <p>Duration: <strong><%= @flight.duration %>hrs</strong></p>
+  <p>Flight Date: <strong><%= @flight.date.to_date %></strong></p>
+</div><br>
+
+<h2><strong>Passengers:</strong></h2>
+<ul>
+  <% @passengers.each do |passenger| %>
+    <li><%= passenger %></li>
+  <% end %>
+</ul>
