@@ -1,19 +1,17 @@
 <h1>Book Flight</h1>
 
-<% flight = Flight.includes(:departure, :destination).find(params[:flight_id]) %>
-
 <div style="padding-left: 1rem; border: 1px solid black;">
   <div style="display: flex; gap: 1rem;">
-    <p style="margin-bottom: 0;">Departing from: <strong><%= flight.departure.name %></strong></p>
-    <p style="margin-bottom: 0;">Destination: <strong><%= flight.destination.name %></strong></p>
+    <p style="margin-bottom: 0;">Departing from: <strong><%= @flight.departure.name %></strong></p>
+    <p style="margin-bottom: 0;">Destination: <strong><%= @flight.destination.name %></strong></p>
   </div>
-  <p>Duration: <strong><%= flight.duration %>hrs</strong></p>
-  <p>Flight Date: <strong><%= flight.date.to_date %></strong></p>
+  <p>Duration: <strong><%= @flight.duration %>hrs</strong></p>
+  <p>Flight Date: <strong><%= @flight.date.to_date %></strong></p>
 </div><br>
 
 <%= form_with model: @booking do |f| %>
   <% if @booking.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" style="color: red;">
       <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this user from being saved:</h2>
       <ul>
       <% @booking.errors.full_messages.each do |message| %>

@@ -8,18 +8,20 @@ class BookingsController < ApplicationController
 
   def new
     @booking = Booking.new
+    @flight = Flight.includes(:departure, :destination).find(params[:flight_id])
     @passengers = params[:passengers].to_i
     @booking.passengers.build
   end
 
   def create
     @booking = Booking.new(booking_params)
+    @flight = Flight.includes(:departure, :destination).find(params[:booking][:flight_id].to_i)
 
     if @booking.save
       flash[:success] = "Flight booked successfully!"
       redirect_to @booking
     else
-      flash.now[:error] = "The flight booking could not be submitted"
+      flash.now[:error] = "The flight booking could not be submitted, please refresh the page"
       render :new, status: :unprocessable_entity
     end
   end
